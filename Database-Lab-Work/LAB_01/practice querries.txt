@@ -1,0 +1,32 @@
+1-  Create database _____ ;
+
+2 - Use databse _______ ;
+
+3 - Create Table _______ ;
+
+
+// example
+CREATE TABLE departments (
+	department_id INT PRIMARY KEY,
+	department_name VARCHAR (30) NOT NULL,
+	location_id INT DEFAULT NULL,
+	
+);
+
+
+4 - Insert into ______ (atributes) (Data) ;
+
+5 - Select ____
+    From   ____
+    Where  ____ ; 
+
+
+6 - AND OR NOT
+
+7 - Order by ______
+
+8 - Update table_name
+    Set column1 = _____ , column2 = _____ ,.....
+    Where _____;
+
+9 - Delete from ______ where ______ 
