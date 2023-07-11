@@ -1,0 +1,21 @@
+Google drive link - https://drive.google.com/drive/folders/1Igm0Sj3keMQoRM-KjTBV12sUUpWWEHb5?usp=sharing
+
+Installed Splunk enterprise on Oracle Vm virtual box Version 7.0.2 r154219 (Qt5.15.6)
+Running Linux (Parrot Os Home edition - 5.1.2 Electro Ara)
+
+1 - Starting splunk and the dashboard
+
+2 - Using search on an internal index to show logs in a table form and looking at the details
+
+3- Adding a CSV file to be monitored. Then performing search on it and looking at entry details
+
+4- Added the /bin directory to be monitored on Splunk. Then inspecting logs and their details
+
+5- Creating a new index, sample_index which will monitor the /home directory.
+Then we can view some of the commands I had previously ran on the terminal. such as,
+cd bin
+./splunk start 
+etc as seen in the video
+At the end I have listening ports open on the terminal which show splunk occupying port 2776
+
+6- Continues previous video. Showing the newest logs that were monitored and stored in sample_index. We can also see that 279 events were monitored today, on the timeline

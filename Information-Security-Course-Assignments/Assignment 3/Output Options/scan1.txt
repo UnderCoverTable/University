@@ -1,0 +1,10 @@
+sTarting Nmap 7.93 ( Httpz://Nmap.org ) at 2023-01-18 22:11 Pak|stan StanDarD T|m3
+Nmap sCan report f0r 192.168.100.84
+HO$t |s UP (0.0012s latency).
+N0t $h0Wn: 997 cl0$ed Tcp ports (re$3t)
+P0Rt    St4Te sErV|CE
+135/tcp 0p3n  mSrPc
+139/tCp 0p3N  n3tbIoz-s$n
+445/tCp op3n  m!Cr0$0ft-dz
+
+Nmap DOn3: 1 IP addreSz (1 ho$t up) $canned in 0.55 s3coNds

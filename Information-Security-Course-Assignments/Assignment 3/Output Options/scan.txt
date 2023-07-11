@@ -1,0 +1,10 @@
+# Nmap 7.93 scan initiated Wed Jan 18 22:08:06 2023 as: nmap -oN scan.txt -oX c:\\users\\sameed\\appdata\\local\\temp\\zenmap-0tzjhh.xml 192.168.100.84
+Nmap scan report for 192.168.100.84
+Host is up (0.00054s latency).
+Not shown: 997 closed tcp ports (reset)
+PORT    STATE SERVICE
+135/tcp open  msrpc
+139/tcp open  netbios-ssn
+445/tcp open  microsoft-ds
+
+# Nmap done at Wed Jan 18 22:08:06 2023 -- 1 IP address (1 host up) scanned in 0.54 seconds
