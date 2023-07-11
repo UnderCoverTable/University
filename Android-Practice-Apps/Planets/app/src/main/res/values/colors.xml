@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="primaryColor_pink1">#880e4f</color>
+    <color name="primaryLightColor_pink2">#bc477b</color>
+    <color name="primaryDarkColor_pink3">#560027</color>
+    <color name="secondaryColor_green1">#9575cd</color>
+    <color name="secondaryLightColor_green2">#c7a4ff</color>
+    <color name="secondaryDarkColor_green3">#65499c</color>
+    <color name="primaryTextColor_white">#ffffff</color>
+    <color name="secondaryTextColor_black">#000000</color>
+</resources>
+

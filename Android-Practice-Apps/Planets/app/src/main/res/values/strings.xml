@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Planets</string>
+    <string name="planetEarth">Earth is the planet we live on, one of eight planets in our solar system and the only known place in the universe to support life. Earth is the third planet from the sun, after Mercury and Venus and before Mars. It is about 150 million kilometers (about 93 million miles) from the sun.</string>
+    <string name="planetMars">Along with Venus, Earth, and Mars, Mercury is one of the rocky planets. It has a solid surface that is covered with craters like our Moon. It has a thin atmosphere, and it does not have any moons. Mercury likes to keep things simple. Mercury spins slowly compared to Earth, so one day lasts a long time.</string>
+    <string name="planetVenus">Venus is the second planet from the Sun, and is Earths closest neighbor in the solar system. Venus is the brightest object in the sky after the Sun and the Moon, and sometimes looks like a bright star in the morning or evening sky. The planet is a little smaller than Earth, and is similar to Earth inside</string>
+    <string name="planetPluto">Pluto is a dwarf planet in the Kuiper Belt, a donut-shaped region of icy bodies beyond the orbit of Neptune. There may be millions of these icy objects, collectively referred to as Kuiper Belt objects (KBOs) or trans-Neptunian objects (TNOs), in this distant region of our solar system.</string>
+    <string name="planetMercury">Along with Venus, Earth, and Mars, Mercury is one of the rocky planets. It has a solid surface that is covered with craters like our Moon. It has a thin atmosphere, and it does not have any moons. Mercury likes to keep things simple. Mercury spins slowly compared to Earth, so one day lasts a long time.</string>
+    <string name="planetJupiter">Jupiter is the fifth planet from the Sun and the largest in the Solar System. It is a gas giant with a mass more than two and a half times that of all the other planets in the Solar System combined, but slightly less than one-thousandth the mass of the Sun.</string>
+    <string name="planetSaturn">Saturn is the sixth planet from the Sun and the second-largest in the Solar System, after Jupiter. It is a gas giant with an average radius of about nine and a half times that of Earth. It has only one-eighth the average density of Earth; however, with its larger volume, Saturn is over 95 times more massive.</string>
+    <string name="planetUranus">Uranus is the seventh planet from the Sun, and has the third-largest diameter in our solar system. It was the first planet found with the aid of a telescope, Uranus was discovered in 1781 by astronomer William Herschel, although he originally thought it was either a comet or a star.</string>
+    <string name="planetKars">THE ULTIMATE LIFE FORM \nKars prepares to return to Earth after being thrown out of orbit by ejecting the built-up air within his body, but the air freezes on its way out. His vital body begins to freeze from the near-absolute zero temperature and he becomes trapped in the void of space for eternity as half-mineral, half-organic.</string>
+    <string name="planetNeptune">Neptune is the eighth and farthest-known Solar planet from the Sun. In the Solar System, it is the fourth-largest planet by diameter, the third-most-massive planet, and the densest giant planet. It is 17 times the mass of Earth, and slightly more massive than its near-twin Uranus.</string>
+
+    <string name="click_me_please">Click Me Please</string>
+    <string name="Mercury">Mercury</string>
+    <string name="venus">Venus</string>
+    <string name="earth">Earth</string>
+    <string name="mars">Mars</string>
+    <string name="Jupiter">Jupiter</string>
+    <string name="Saturn">Saturn</string>
+    <string name="Uranus">Uranus</string>
+    <string name="Neptune">Neptune</string>
+    <string name="Pluto">Pluto</string>
+    <string name="Kars">Kars</string>
+
+
+    <string-array name="planets_names_array_spinner">
+            <item>Mercury</item>
+            <item>Venus</item>
+            <item>Earth</item>
+            <item>Mars</item>
+            <item>Jupiter</item>
+            <item>Saturn</item>
+            <item>Uranus</item>
+            <item>Neptune</item>
+            <item>Pluto</item>
+            <item>Kars</item>
+
+    </string-array>
+
+</resources>
