@@ -1,0 +1,98 @@
+body{
+    font-family: Poppins;
+}
+
+
+#b1{
+    float: left;
+    margin-right: 20px;
+    background-color:brown;
+    border: 1px solid black;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+}
+
+#b2{
+    float: left;
+    margin-right: 20px;
+
+    background-color:aquamarine;
+    border: 1px solid black;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+
+}
+
+#b3{
+    float: left;
+    margin-right: 20px;
+
+    background-color:darkorchid;
+    border: 1px solid black;
+    height: 100px;
+    width: 100px;
+    text-align: center;
+
+}
+
+#big-box{
+    position: relative;
+    top:150px;
+    height: 300px;
+    width: 300px;
+    border: 1px solid black;
+    background-size: cover;
+}
+
+#main-box{
+    border: 1px solid white;
+    height: 320px;
+    width: 195px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+#inside-box{
+
+    height: 180px;
+    width: 180px;
+    border-radius: 15px;
+    position: absolute;
+    left: 18px;
+    top: 100px;
+    border-radius: 100% 0% 100% 0% / 0% 50% 50% 0%;
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+
+    background: linear-gradient(to bottom left, #7f00ff 0%, #e100ff 100%);
+    z-index: -1;
+
+
+
+}
+
+
+#css-button {
+    position:relative; 
+    top:280px;
+    background: linear-gradient(to bottom left, #7f00ff 0%, #e100ff 100%);
+    border-radius:10px 10px 10px 10px;
+    border: none;
+    width: 70px;
+    height: 20px;
+    color: white;
+    
+}
+
+#css-icon{
+
+    position: absolute;
+    left: 60px;
+    top: 50px;
+    color: white;;
+
+}
+

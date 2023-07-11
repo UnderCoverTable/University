@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>    <script src="script.js"></script>
+
+    
+  </head>
+  <body>
+
+    <div id = "Task1">
+
+        <h1>Blue Cow by Gelett Burgess {published in The Lark, 1895} </h1>
+        <p id = "cow-text"> I never saw a Blue cow, I never hope to see one, But I can tell you, anyhow, Id rather seen then be one.</p>
+        Change the cow's color to:  <input type="text" id="cow-color"> <button type="button" id = "change-button">Change</button>
+
+
+    </div>
+    <br> 
+    <br>
+    <div id ="Task2">
+        <div id = "box1">
+            
+        </div>
+            <button type="button" id = "change-color1">Toggle Color</button>
+            <button type="button" id = "change-border1">Toggle Rounded borders</button>
+
+
+        <div id = "box2">
+           
+
+        </div>
+        <button type="button" id = "change-color2">Toggle Color</button>
+        <button type="button" id = "change-border2">Toggle Rounded borders</button>
+
+        <div id = "box3">
+          
+        </div>
+        <button type="button" id = "change-color3">Toggle Color</button>
+        <button type="button" id = "change-border3">Toggle Rounded borders</button>
+    </div>
+
+    
+
+    <div id = "Task4">
+        <div id = "box4">
+
+        </div>
+
+    </div>
+
+    <div id = "Task3">
+        <table id = "table">
+            <tr>
+                <th>s/n</th>
+                <th>Name</th>
+                <th>Class</th>
+                <th>Reg. Num</th>
+            </tr>
+    
+            <tr>
+                <td>1</td>
+                <td>Ali</td>
+                <td>BSCS</td>
+                <td>10</td>
+            </tr>
+
+            <tr>
+                <td>2</td>
+                <td>Ayesha</td>
+                <td>MSCS</td>
+                <td>12</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Sana</td>
+                <td>BSCS</td>
+                <td>14</td>
+
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Sara</td>
+                <td>MSCS</td>
+                <td>15</td>
+
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Sara</td>
+                <td>BSCS</td>
+                <td>16</td>
+
+            </tr>
+        </table>
+        <br>
+        <button type="button" id = "search">Search Student</button>
+        <button type="button" id = "Add">Add Student</button>
+
+       
+
+    </div>
+
+  </body>
+
+  <script>
+    $(document).ready(function(){
+        $("#change-button").click(function(){
+
+            const newColor = document.getElementById("cow-color").value;
+            const updatedColor = $("#cow-text").text().replace("Blue",String(newColor));
+            $("#cow-text").text(updatedColor);
+           
+    });
+    $("#change-color1").click(function(){
+        $('#box1').css('background-color', 'pink');
+    });
+    $("#change-border1").click(function(){
+        $('#box1').css('border-radius', '20px 20px 20px 20px');
+    });
+
+    $("#change-color2").click(function(){
+        $('#box2').css('background-color', 'crimson');
+    });
+    $("#change-border2").click(function(){
+        $('#box2').css('border-radius', '30px 30px 30px 30px');
+    });
+
+    $("#change-color3").click(function(){
+        $('#box3').css('background-color', 'darkkhaki');
+    });
+    $("#change-border3").click(function(){
+        $('#box3').css('border-radius', '40px 40px 40px 40px');
+    });
+
+
+    })
+
+    $("#box4").mouseover(function(){
+        $("#box4").css('background-color', 'orangered');
+
+    });
+
+    $("#box4").mouseleave(function(){
+        $("#box4").css('background-color', 'aquamarine');
+
+    });
+    
+    
+    $("#box4").click(function(){
+        $('#box4').hide();
+
+    });
+
+    $("#Add").click(function(){
+        $('#table tr:last').after('<tr><td></td><td></td><td></td><td></td></tr>');
+
+
+    });
+    $('#search').click(() => {
+        $('#table tr').each((index, element) => {
+            if (index !== 0) {
+                $(element).children().each((index, element) => {
+                    if ($(element).html() === "BSCS") {
+                        $(element).css('background-color', 'teal');
+                    }
+                    if ($(element).html() === "MSCS") {
+                        $(element).css('background-color', 'salmon');
+                    }
+                })
+            }
+        })
+    })
+
+</script>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- <link rel="stylesheet" href="practiceCSS.css"> -->
+        <style>
+            @media only screen and (max-width: 6000px) {
+                body {
+                    background-color: teal;
+                }
+            }
+            @media only screen and (max-width: 600px) {
+                body {
+                    background-color: lightcoral;
+                }
+            }
+            #div1 {
+                    
+                    width: 500px;
+                    height: 500px;
+                    border: 5px solid black;
+                    padding: 50px;
+                    margin: 20px;
+                }
+            #div2 {
+                
+                position: absolute;
+                width: 100px;
+                height: 100px;
+                border: 5px solid red;
+                padding: 50px;
+                margin: 20px;
+                background: red;
+                margin-top: 0%;
+                margin-right: 100%;
+                
+                
+            }
+            #div3 {
+                
+                position: absolute;
+                width: 100px;
+                height: 100px;
+                border: 5px solid yellow;
+                padding: 50px;
+                margin: 20px;
+                background: yellow;
+                margin-top: 30%;
+                margin-left: 30%;
+            
+                
+            }
+            #div2:hover + #div3{
+                border:red;
+                background: red;
+            
+               
+            }
+            #div3:hover{
+                display: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div id = div1>
+
+            <div id = div2>
+                <h1> BOX 1</h1>
+    
+            </div>
+
+            <div id = div3>
+                <h1> BOX 2</h1>
+    
+            </div>
+
+        </div>
+
+        
+
+      
+
+        
+
+
+
+    </body>
+</html>

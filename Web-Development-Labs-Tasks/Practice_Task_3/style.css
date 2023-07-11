@@ -1,0 +1,104 @@
+@media only screen and (max-width: 600px) {
+    body {
+      background-color: lightblue;
+    }
+    body #outsideDiv{
+        width: 300px;
+        height: 600px;
+        border: 2px solid black;
+    }
+    body #topBarDiv{
+        width: 300px;
+        height: 100px;
+        border: 2px solid black;
+        position: absolute;
+        background-color: aquamarine;
+    }
+
+    body #bottomBarDiv{
+        width: 300px;
+        height: 100px;
+        border: 2px solid black;
+        position: absolute;
+        background-color: aquamarine;
+        top: 510px;
+    }
+
+    body #leftBarDiv{
+        height: 80px;
+        width: 300px;
+        background-color: palevioletred;
+        position: absolute;
+        top:348px;
+
+    }
+
+    body #rightBarDiv{
+        height: 80px;
+        width: 300px;
+        background-color: palevioletred;
+        position: absolute;
+        top:430px;
+        left: 10px;
+
+    }
+
+
+    body #centerDiv{
+
+        height: 250px;
+        width: 300px;
+       background-color: red;
+       position: absolute;
+       left: 10px;
+       top:110px;
+
+    }
+  }
+
+
+#outsideDiv{
+    width: 800px;
+    height: 400px;
+    border: 2px solid black;
+}
+
+#topBarDiv,#bottomBarDiv{
+    width: 800px;
+    height: 100px;
+    border: 2px solid black;
+    position: absolute;
+    background-color: aquamarine;
+
+}
+
+#bottomBarDiv{
+    top:310px;
+}
+
+#leftBarDiv,#rightBarDiv{
+
+    width: 100px;
+    height: 200px;
+    border: 2px solid black;
+    position: absolute;
+    top:110px;
+    background-color: palevioletred;
+
+}
+
+#rightBarDiv{
+    left: 710px;
+}
+
+#centerDiv{
+
+    width: 600px;
+    background-color: red;
+    height: 200px;
+    border: 2px solid black;
+    position: absolute;
+    top:110px;
+    left:110px;
+
+}

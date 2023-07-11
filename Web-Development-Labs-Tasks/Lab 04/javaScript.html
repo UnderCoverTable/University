@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <script src="./javaScript.js"></script>
+
+  </head>
+    <body>
+        <div>
+            <h1> TASK 1</h1>
+            <button type="button" onclick=task1()> Task 1</button> <!--button click calls the task1 function-->
+
+            <div id="a"> <!-- div to display the array-->
+
+            </div>
+            <div id="b"> <!-- div to display sum-->
+                
+            </div>
+        </div>
+
+        <div>
+            <h1>TASK2</h1>
+            <!--Takes input from user in two seperate form fields-->
+            <form id="numInput">
+                Num1: <input type="text" id ="Num1" ><br>
+                Num1: <input type="text" id ="Num2" ><br>
+
+                <!-- Each operation has its button defined in the js file-->
+            <button type="button" onclick=add()> ADD</button>
+            <button type="button" onClick=subtract()> SUBTRACT</button>
+            <button type="button" onClick=multiply()> MULTIPLY</button>
+            <button type="button" onclick=divide()> DIVIDE</button>
+    
+            <div id = "operation-result">
+    
+            </div>
+            </form> 
+    
+        </div>
+
+        <div>
+            <h1>TASK3</h1>
+            <!-- Takes array as input and sorts it-->
+            <form>
+                Array: <input type="text" id="arrayInput"><br>
+
+                <button type="button" onclick=sortArray()> Sort</button>
+
+
+                <div id = "arSort">
+
+                </div>
+            </form>
+
+        </div>
+
+        <div>
+            <h1>TASK4</h1>
+            <!-- Takes input in form and calls validateForm to show reults on the webpage-->
+            <form id="formInput">
+                Name: <input type="text" id ="name" ><br><br>
+                Email: <input type="text" id ="email" ><br><br>
+                Password: <input type="text" id="pass"><br><br>
+
+                <button type="button" onclick=validateForm()> Submit</button>
+
+            </form>
+
+
+        </div>
+
+        <div>
+            <h1>TASK5</h1>
+            <!--Takes input from and displays all possible tips-->
+            <form id="bill">
+                Bill: <input type="text" id ="billed" ><br>
+                People: <input type="text" id ="people" ><br>
+
+    
+            <button type="button" onclick=tipCalc()> Calculate Tip</button>
+
+    
+            <div id = "tipVal1"></div>
+            <div id = "tipVal2"></div>
+            <div id = "tipVal3"></div>
+            <div id = "tipVal4"></div>
+            <div id = "tipVal5"></div>
+
+
+            </form> 
+
+        </div>
+ 
+
+
+    </body>
+
+</html>

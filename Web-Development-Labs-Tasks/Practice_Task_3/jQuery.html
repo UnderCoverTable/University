@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>    <script src="script.js"></script>
+
+    
+  </head>
+  <body>
+
+    <div id = "Task1">
+        <h1>Question 1</h1>
+        <p id = "text1"> I never saw a Blue cow, I never hope to see one, But I can tell you, anyhow, Id rather seen then be one.</p>
+        <button type="Button" id = "hide-button">Hide Paragraph</button>
+        <button type="Button" id = "show-button">Show Paragraph</button>
+    </div>
+
+    <div id = "Task2">
+
+        <h1>Question 2</h1>
+        <p id = "text2"> I never saw a Blue cow, I never hope to see one, But I can tell you, anyhow, Id rather seen then be one.</p>
+        <button type="button" id = "change-button">Change Paragraph</button>
+
+
+    </div>
+
+    <div id = "Task3">
+
+        <h1>Question 3</h1>
+        <p id = "text3"> I never saw a Blue cow, I never hope to see one, But I can tell you, anyhow, Id rather seen then be one.</p>
+        <button type="button" id = "change-color">Change Text Color</button>
+
+
+    </div>
+    
+    <div id = "Task4">
+
+        <h1>Question 4</h1>
+        <button type="button" id = "change-Backcolor">Change Background color of body</button>
+
+
+    </div>
+    
+  </body>
+
+  <script>
+    $(document).ready(function(){
+        $("#hide-button").click(function(){
+
+            $("#text1").hide(); // Hides the paragraph
+           
+        });
+         $("#show-button").click(function(){
+
+            $("#text1").show(); // Shows the paragraph
+
+        });
+        $("#change-button").click(function(){
+
+            $("#text2").text("Changed Paragraph"); // Updates the text with the one provided in argument
+
+        });
+
+        $("#change-color").click(function(){
+
+            $("#text3").css("color",'blue'); // Updates the css property of color of the text
+
+        });
+
+        $("#change-Backcolor").click(function(){
+
+            $("body").css("background-color","aquamarine"); // Updates the css property of Background color of the text
+
+        });
+
+    })
+
+</script>
+
+</html>
