@@ -1,0 +1,27 @@
+is_male(tom)
+true
+
+is_male(X)
+X = tom
+X = bob
+X = jim
+X = joe
+
+parent_of(X,liz)
+X = tom
+
+parent_of(bob,pat)
+true
+
+is_mother(pam,bob)
+true
+
+is_father(tom,pam)
+false
+
+grandparent_of(X,jim)
+X = bob
+
+grandchildren_of(X,tom)
+X = ann
+X = pat
