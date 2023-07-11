@@ -1,0 +1,56 @@
+#if ('0' <= ch && ch <= '9')
+#{
+#    return ch - '0';
+#}
+
+.data
+	check0:	.asciiz "Check0"
+	check1:	.asciiz "Check1"
+	zero:	.asciiz "0"
+	one:	.asciiz "1"
+	two:	.asciiz "2"
+	nine:	.asciiz "9"
+
+	a:	.asciiz "A"
+	b:	.asciiz "B"
+	c:	.asciiz "C"
+	f:	.asciiz "F"
+	
+	input:	.asciiz "C"
+	
+.text
+.main
+	la	$s0,a
+	la	$s1,nine
+	
+
+	la	$t3,input
+
+	ble 	$t3,$s1,bet_z_n
+
+	bge 	$t3,$s0,bet_a_f
+	
+	
+bet_z_n:
+	li	$v0,4
+	la	$a0,check0
+	syscall
+	
+	sub	$t4,$t3,$zero
+	j	disp
+	
+bet_a_f:
+	li	$v0,4
+	la	$a0,check1
+	syscall
+	
+	addi	$t4,$s0,10
+	sub		$t4,$t4,$t3
+	
+	j	disp
+	
+disp:
+	li	$v0,1
+	move	$a0,$t4
+	syscall
+	

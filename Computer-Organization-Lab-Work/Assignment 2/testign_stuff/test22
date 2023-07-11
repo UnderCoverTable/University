@@ -1,0 +1,68 @@
+.data
+machinecode: .word 0x12345678
+prompt0: .asciiz "Instruction in hex format: "
+prompt1: .asciiz "\nOpcode field <6 bits>: "
+prompt2: .asciiz "\nRs field <5 bits>: "
+prompt3: .asciiz "\nRt field <5 bits>: "
+prompt4: .asciiz "\nRd field <5 bits>: "
+prompt5: .asciiz "\nShamt field <5 bits>: "
+prompt6: .asciiz "\nFunct field <6 bits>: "
+.text   #DISPLAY MACHINE CODE GIVEN
+   lw $t0,machinecode   #LOAD THE NUMBER INTO T0
+   la $a0,prompt0       #DISPLAY PROMPT
+   li $v0,4
+   syscall
+   move $a0,$t0       #DISPLAY MACHINE CODE
+   li $v0,34
+   syscall
+   #EXTRACT THE OPCODE AND DISPLAY
+   andi $t1,$t0,0xFC000000   #EXTRACT THE MSB 6 BITS
+   la $a0,prompt1       #PROMPT
+   li $v0,4
+   syscall
+   sra $a0,$t1,26       #SHIFT THE EXTRACTED NUMBER 26 BITS RIGHT SO THAT IT IS IN THE RIGHTMOST POSITION
+   li $v0,1
+   syscall           #DISPLAY
+   #EXTRACT RS FIELD AND DISPLAY
+   andi $t1,$t0,0x03E00000   #EXTRACT RS BIT FIELD
+   la $a0,prompt2
+   li $v0,4
+   syscall
+   sra $a0,$t1,21       #SHIFT IT 21 BITS RIGHT SO THAT IT IS IN THE RIGHTMOST POSITION
+   li $v0,1
+   syscall
+   #EXTRACT AND DISPLAY RT FIELD
+   andi $t1,$t0,0x001F0000
+   la $a0,prompt3
+   li $v0,4
+   syscall
+   sra $a0,$t1,16
+   li $v0,1
+   syscall
+   #EXTRACT AND DISPLAY RD FIELD
+   andi $t1,$t0,0x0000F800
+   la $a0,prompt4
+   li $v0,4
+   syscall
+   sra $a0,$t1,11
+   li $v0,1
+   syscall
+   #EXTRACT AND DISPLAY SHAMT FIELD
+   andi $t1,$t0,0x000007C0
+   la $a0,prompt5
+   li $v0,4
+   syscall
+   sra $a0,$t1,6
+   li $v0,1
+   syscall
+   #EXTRACT AND DISPLAY FUNCT FIELD
+   andi $t1,$t0,0x0000003F
+   la $a0,prompt6
+   li $v0,4
+   syscall
+   move $a0,$t1
+   li $v0,1
+   syscall
+   #GRACEFUL EXIT
+   li $v0,10
+   syscall

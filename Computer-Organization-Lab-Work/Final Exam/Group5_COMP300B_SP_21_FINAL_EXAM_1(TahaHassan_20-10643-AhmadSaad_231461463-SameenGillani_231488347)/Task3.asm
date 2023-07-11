@@ -1,0 +1,231 @@
+# Program Name: Task 3.asm
+# Group Number: 5
+# Group Members:
+# Taha Hassan, 20-10643
+# Muhammad Sameed Gilani, 231488347
+# Ahmad Saad, 231461463
+##############################
+
+.data
+enterString: .asciiz "Enter string: \n"
+text: .space 101
+text_size: .word 100
+
+lowerString:	.asciiz "Lower case version of the string is: \n"
+
+
+.text
+main:
+
+#	Print a prompt, asking user to enter a string
+li	$v0,4
+la $a0,enterString
+syscall
+
+#	Create space in memory then read and writes the users input string into memory. 
+li	$v0,8
+la	$a0,text
+lw	$a1,text_size
+syscall
+
+
+la $s0,text 	#	Loading the users input string into, $s0
+li $t0,0		#	$t0 will act as an index/counter, that increments each loop,
+				##	that we will use to access each letter in the string.
+				
+ConvertLowerCase:
+
+add $s1, $s0, $t0 	#	According to the value of $t0, we "skip" n letters from the start.
+					##	If $t0 = 2 then $s1 has the string starting from the 3rd letter
+					###	Ex: if $t0 = 2 and $s0 = abcd. Then $s1 = cd
+					
+lb $t3,($s1)	#	Loads byte, i.e. the first letter from $s1
+				##	Ex: If $s1 = cd. Then $t3 = c
+
+beqz $t3,PrintString	#	Exit condition. When the letter, i.e byte loaded in $t3 is = 0. We exit, as we have
+						##	reached the end of the string.
+				
+#	Checks each letter of the input string, and then branches to the corresponding lower case letter conversion lable.
+#	If the letter is already lower Case or is non-alpha, then it is skipped and $t0 is incremented and ConvertLowerCase loops over.
+beq $t3,'A',a
+beq $t3,'B',bb
+beq $t3,'C',c
+beq $t3,'D',d
+beq $t3,'E',e
+beq $t3,'F',f
+beq $t3,'G',g
+beq $t3,'H',h
+beq $t3,'I',i
+beq $t3,'J',jj
+beq $t3,'K',k
+beq $t3,'L',l
+beq $t3,'M',m
+beq $t3,'N',n
+beq $t3,'O',o
+beq $t3,'P',p
+beq $t3,'Q',q
+beq $t3,'R',r
+beq $t3,'S',s
+beq $t3,'T',t
+beq $t3,'U',u
+beq $t3,'V',v
+beq $t3,'W',w
+beq $t3,'X',x
+beq $t3,'Y',y
+beq $t3,'Z',z
+
+addi $t0,$t0,1	#	Increments $t0 ( the index/counter ) to access the next letter in the string.
+j ConvertLowerCase	#	Loops back to the start 
+
+
+PrintString:
+#	Prints text, that the following is the lower Case output
+li $v0,4
+la $a0,lowerString
+syscall
+
+#	Prints the users input, in lower Case
+li $v0,4
+move $a0,$s0
+syscall
+
+jal Exit
+
+Exit:
+#	Exits the program gracefully
+li $v0,10
+syscall
+
+
+#	The following simply overwrites the Lower Case version of the letter at the position that
+##	the Upper case version of it existed, in the input string 
+
+a:
+li $t3,'a'			#	Loads the lower Case letter into $t3
+sb $t3,($s1)		#	stores the byte (Overwrites the letter) at its original position in the input string.
+j ConvertLowerCase	#	Jumps back to ConvertLowerCase to process the remaining letters in the input string.
+					#	This same process happens for each of the following alphabets. 
+bb:
+li $t3,'b'
+sb $t3,($s1)
+j ConvertLowerCase
+
+c:
+li $t3,'c'
+sb $t3,($s1)
+j ConvertLowerCase
+
+d:
+li $t3,'d'
+sb $t3,($s1)
+j ConvertLowerCase
+
+e:
+li $t3,'e'
+sb $t3,($s1)
+j ConvertLowerCase
+
+f:
+li $t3,'f'
+sb $t3,($s1)
+j ConvertLowerCase
+
+g:
+li $t3,'g'
+sb $t3,($s1)
+j ConvertLowerCase
+
+h:
+li $t3,'h'
+sb $t3,($s1)
+j ConvertLowerCase
+
+i:
+li $t3,'i'
+sb $t3,($s1)
+j ConvertLowerCase
+
+jj:
+li $t3,'j'
+sb $t3,($s1)
+j ConvertLowerCase
+
+k:
+li $t3,'k'
+sb $t3,($s1)
+j ConvertLowerCase
+
+l:
+li $t3,'l'
+sb $t3,($s1)
+j ConvertLowerCase
+
+m:
+li $t3,'m'
+sb $t3,($s1)
+j ConvertLowerCase
+
+n:
+li $t3,'n'
+sb $t3,($s1)
+j ConvertLowerCase
+
+o:
+li $t3,'o'
+sb $t3,($s1)
+j ConvertLowerCase
+
+p:
+li $t3,'p'
+sb $t3,($s1)
+j ConvertLowerCase
+
+q:
+li $t3,'q'
+sb $t3,($s1)
+j ConvertLowerCase
+
+r:
+li $t3,'r'
+sb $t3,($s1)
+j ConvertLowerCase
+
+s:
+li $t3,'s'
+sb $t3,($s1)
+j ConvertLowerCase
+
+t:
+li $t3,'t'
+sb $t3,($s1)
+j ConvertLowerCase
+
+u:
+li $t3,'u'
+sb $t3,($s1)
+j ConvertLowerCase
+
+v:
+li $t3,'v'
+sb $t3,($s1)
+j ConvertLowerCase
+
+w:
+li $t3,'w'
+sb $t3,($s1)
+j ConvertLowerCase
+
+x:
+li $t3,'x'
+sb $t3,($s1)
+j ConvertLowerCase
+
+y:
+li $t3,'y'
+sb $t3,($s1)
+j ConvertLowerCase
+
+z:
+li $t3,'z'
+sb $t3,($s1)
+j ConvertLowerCase

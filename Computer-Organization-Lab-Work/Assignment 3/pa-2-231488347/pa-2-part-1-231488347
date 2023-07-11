@@ -1,0 +1,66 @@
+.data
+	#Program Name: a2_pb1.asm
+	#Programmer Name: Muhammad Sameed Gilani
+	#Programmer Roll Number: 231488347
+
+prompt: .asciiz "Enter a number: "
+result: .asciiz "Result is: "
+
+.text
+main:
+	jal getNum
+	jal firstSum
+	
+	#Print fresult statement
+	li	$v0,4
+	la	$a0,result
+	syscall
+	#Print final sum
+	li	$v0,1
+	move	$a0,$v1
+	syscall
+	
+	jal Exit
+	
+getNum:
+	#Prints prompt asking user to enter a number
+	li	$v0,4
+	la	$a0,prompt
+	syscall
+	
+	#Reads user input and stores in $v0
+	li	$v0,5
+	syscall
+	move	$v1,$v0		#Store number as return value, in $v1
+	
+	jr	$ra		#Go back to caller
+	
+firstSum:
+	move	$t8,$ra	# RETURN ADDRESS TO MAIN
+	move	$t0,$v1 # get initial value from getnum
+	
+	jal	getNum
+	move	$t1,$v1	#getnum returned value
+	
+	add $v1,$t0,$t1	#initial sum of the first 2 inputs
+	
+	
+	jal secondSum
+	jr	$t8 #Going back to main
+	
+secondSum:
+	move 	$t9,$ra # RETURN address TO firstSum
+	move	$t0,$v1 # Sum of first 2 inputs value from firstSum
+	
+	jal getNum
+	move	$t1,$v1 #return value from getnum
+	
+	add	$v1,$t0,$t1 #add sum of first 2 num and new num from getNum
+	
+	jr	$t9	#return to firstsum
+	
+	
+Exit:
+	#End program gracefully
+	li	$v0,10
+	syscall

@@ -1,0 +1,141 @@
+.data
+	#Program Name: a1_pb1.asm
+	#Programmer Name: Muhammad Sameed Gilani
+	#Programmer Roll Number: 231488347
+	
+	prompt: .asciiz	"Enter your number: "
+	
+	list:	.space 24	#allocate this space for a list
+	size:	.word 6		#number of elements in the list
+
+	plus:	.asciiz " + "
+	equal:	.asciiz " = "
+
+.text
+main:
+
+	jal get_input
+	jal add_num
+	jal display_output
+	jal exit_program
+	
+	
+display_output:
+	li	$t0,0	#loop counter
+	la	$s1,list	#starting address of array
+	lw	$s0,size	#size of list/number of iterations
+	
+loop_display_output:
+
+	beq	$t0,5,eq_sign	# to print out an equal sign before the last number. ie the answer, is displayed
+
+	lw	$t1,($s1)	#load the first number from array
+	
+	li	$v0,1	# print that number
+	move	$a0,$t1
+	syscall
+	
+	addi	$s1,$s1,4	#increment the array index and loop counter
+	addi	$t0,$t0,1
+
+	
+	li	$v0,4		# prints + , after every number is printed, except after the last and second last number
+	la	$a0,plus
+	syscall
+	
+	b	loop_display_output		#restarts the loop
+
+add_num:
+	li	$t0,1	#loop counter
+	la	$s1,list	#starting address of array
+	lw	$s0,size	#size of list/number of iterations
+	la	$s2,list	#starting address of array (This is to store the 6th position)
+	addi	$s2,$s2,20	#6th position
+		
+loop_add_num:
+
+	beq	$t0,$s0,exit_func	# when counter reaches list size, it goes to exit func which sends it back to main
+	lw	$t1,($s1)	# number from array
+
+	lw	$t2,($s2)	#6th number (initially it is 0)
+	
+	add		$t2,$t1,$t2		#adding the each number from 1st to 5th position, to the number in the 6th position
+	sw	$t2,($s2)	#storing that new number at the 6th position of the array
+
+	addi	$s1,$s1,4	#increment the array index and loop counter
+	addi	$t0,$t0,1
+	
+	
+	b	loop_add_num
+
+
+get_input:
+
+	li	$t0,1	#loop counter
+	la	$s1,list	#starting address of array
+	lw	$s0,size	#size of list/number of iterations
+	move	$s2,$ra		# This is to keep track of the return address back to main.
+							# As when we jal print_prompt, $ra is overwritten.
+loop_get_input:
+	beq 	$t0,$s0,exit_func_special	# if $t0 == $s0. we go to exit_func_special only for this function.  
+										# as it uses $s2 (where we stored $ra) to return back to main
+	
+	jal print_prompt		# prompt user to enter values
+	
+	
+	# read user response
+	li	$v0,5
+	syscall
+	move	$t1,$v0
+	
+	# store this number in array
+	sw	$t1,($s1)
+	
+	addi	$s1,$s1,4	#increment the array index and loop counter
+	addi	$t0,$t0,1
+	
+	b	loop_get_input
+	
+print_prompt:
+		
+	#	Prints the prompt to enter a value, and returns back to loop_get_num, where it jumped from.		
+	li	$v0,4
+	la	$a0,prompt
+	syscall
+		
+	jr	$ra
+		
+exit_func:
+	# This is to allow functions to branch here and return back to main
+	jr	$ra
+	
+exit_func_special:
+	#this is only for loop_get_input. As it uses $s2(where we stored $ra, to return back to main)
+	jr	$s2
+
+eq_sign:
+	
+	# only brached from loop_display_output, after the 5th number is displayed. This prints an equal sign after it.
+	# this also prints the 6th number. ie the sum after printing the equal sign
+
+	la	$s1,list	#starting address of array
+	addi	$t1,$s1,20	#6th position
+	lw	$t0,($s2)	#6th number from array
+	
+	#Prints equal sign
+	li	$v0,4	
+	la	$a0,equal
+	syscall
+	
+	# prints the 6th number from array. ie the final sum
+	li	$v0,1
+	move	$a0,$t0
+	syscall
+	
+	b	exit_func	# returns back to loop_display_output, from where it left off
+
+		
+exit_program:
+	# to exit the program gracefully
+	li	$v0,10
+	syscall

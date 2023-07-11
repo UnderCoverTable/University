@@ -1,0 +1,112 @@
+.data
+	#	Input statements for users name & course
+	name: .asciiz "Enter your name: "							
+	course: .asciiz "Enter your favourite course title: "		
+	like: .asciiz " likes "
+	nextline:	.asciiz	"\n"
+	
+	input1: .space 8					#	User name input
+	input2: .space 9					#	User fav course input
+	inputsize1: .word 7					#	Name input size
+	inputsize2:	.word 8					#	Course title input size
+
+.text
+Task1:
+	#	User is asked to input name
+	li	$v0,4
+	la	$a0,name
+	syscall
+	
+	#	The input is stored in the variable input1
+	li	$v0,8
+	la	$a0,input1
+	lw	$a1,inputsize1
+	syscall
+	
+	#	Goes to next line
+	li	$v0,4
+	la	$a0,nextline
+	syscall
+
+	#	User is asked to input name
+	li	$v0,4
+	la	$a0,course
+	syscall
+	
+	#	The input is stored in the variable input2
+	li	$v0,8
+	la	$a0,input2
+	lw	$a1,inputsize2
+	syscall
+	
+	#	Goes to next line
+	li	$v0,4
+	la	$a0,nextline
+	syscall
+
+	#	Prints the users name
+	li	$v0,4
+	la $a0,input1
+	syscall
+	
+	#	Prints "like" inbetween the name and course
+	li	$v0,4
+	la	$a0,like
+	syscall
+	
+	#	Prints the course title
+	li	$v0,4
+	la	$a0,input2
+	syscall
+
+
+
+.data
+	#	Created vairbles for each integer
+	a:	.word 5
+	b:	.word 2
+	c:	.word 3 
+	x:	.asciiz "\n\nEnter a value for x: "					#	User input for X
+	ans:	.asciiz "The result of the quadratic equation is = "	#	Answer statement
+	
+.text
+Task2:
+	
+	#	Asks user to input an integer, x
+	li	$v0,4
+	la	$a0,x
+	syscall
+	
+	#	x is stored in $v0 and then moved to $t3
+	li	$v0,5
+	syscall
+	move	$t3,$v0
+	
+	#	The initially created variables are moved to reigtsers
+	lw	$t0,a
+	lw	$t1,b
+	lw	$t2,c
+	
+	#	Arithmetic operations are performed
+	
+	mul	$t4,$t3,$t3		#	x^2 is computed
+	mul $t5,$t4,$t0		#	x^2 * a is computed and stored in $t5
+	
+	mul	$t6,$t1,$t3		#	x * b is computed and stored in $t6
+	
+	add	$t7,$t6,$t5		#	(x^2 * a) + (x * b) is computed and stored in $t7
+	add	$t8,$t7,$t2		#	(x^2 * a) + (x * b) + c , is computed and stored in $t8. i.e y
+	
+	#	Answer statement is printed
+	li	$v0,4
+	la	$a0,ans
+	syscall
+	
+	#	Final answer is printed
+	li	$v0,1
+	move	$a0,$t8
+	syscall	
+	
+	#	Program ends properly
+	li $v0,10
+	syscall

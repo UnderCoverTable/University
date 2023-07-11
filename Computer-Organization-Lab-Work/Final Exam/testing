@@ -1,0 +1,25 @@
+.data
+new_line:	.asciiz "abc"
+end:	.asciiz " \n"
+ck: .asciiz "chchc"
+
+.text
+main:
+li $s3,0
+la $t0,new_line
+ 
+lb $t1,0($t0)
+
+li $v0,11
+move $a0,$t1
+syscall
+
+beq $t1,$s3,check
+
+li $v0,10
+syscall
+
+check:
+li $v0,4
+la $a0,ck
+syscall

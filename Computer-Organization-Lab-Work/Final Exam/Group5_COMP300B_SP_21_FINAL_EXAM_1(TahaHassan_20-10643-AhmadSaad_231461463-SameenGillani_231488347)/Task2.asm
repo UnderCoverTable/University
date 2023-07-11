@@ -1,0 +1,231 @@
+# Program Name: Task 2.asm
+# Group Number: 5
+# Group Members:
+# Taha Hassan, 20-10643
+# Muhammad Sameed Gilani, 231488347
+# Ahmad Saad, 231461463
+##############################
+
+.data
+enterString: .asciiz "Enter string: \n"
+text: .space 101
+text_size: .word 100
+
+upperString:	.asciiz "Upper case version of the string is: \n"
+
+
+.text
+main:
+
+#	Print a prompt, asking user to enter a string
+li	$v0,4
+la $a0,enterString
+syscall
+
+#	Create space in memory then read and writes the users input string into memory. 
+li	$v0,8
+la	$a0,text
+lw	$a1,text_size
+syscall
+
+
+la $s0,text 	#	Loading the users input string into, $s0
+li $t0,0		#	$t0 will act as an index/counter, that increments each loop,
+				##	that we will use to access each letter in the string.
+				
+ConvertUpperCase:
+
+add $s1, $s0, $t0 	#	According to the value of $t0, we "skip" n letters from the start.
+					##	If $t0 = 2 then $s1 has the string starting from the 3rd letter
+					###	Ex: if $t0 = 2 and $s0 = abcd. Then $s1 = cd
+					
+lb $t3,($s1)	#	Loads byte, i.e. the first letter from $s1
+				##	Ex: If $s1 = cd. Then $t3 = c
+
+beqz $t3,PrintString	#	Exit condition. When the letter, i.e byte loaded in $t3 is = 0. We exit, as we have
+						##	reached the end of the string.
+				
+#	Checks each letter of the input string, and then branches to the corresponding upper case letter conversion lable.
+#	If the letter is already Upper Case or is non-alpha, then it is skipped and $t0 is incremented and ConvertUpperCase loops over.
+beq $t3,'a',A
+beq $t3,'b',B
+beq $t3,'c',C
+beq $t3,'d',D
+beq $t3,'e',E
+beq $t3,'f',F
+beq $t3,'g',G
+beq $t3,'h',H
+beq $t3,'i',I
+beq $t3,'j',J
+beq $t3,'k',K
+beq $t3,'l',L
+beq $t3,'m',M
+beq $t3,'n',N
+beq $t3,'o',O
+beq $t3,'p',P
+beq $t3,'q',Q
+beq $t3,'r',R
+beq $t3,'s',S
+beq $t3,'t',T
+beq $t3,'u',U
+beq $t3,'v',V
+beq $t3,'w',W
+beq $t3,'x',X
+beq $t3,'y',Y
+beq $t3,'z',Z
+
+addi $t0,$t0,1	#	Increments $t0 ( the index/counter ) to access the next letter in the string.
+j ConvertUpperCase	#	Loops back to the start 
+
+
+PrintString:
+#	Prints text, that the following is the Upper Case output
+li $v0,4
+la $a0,upperString
+syscall
+
+#	Prints the users input, in Upper Case
+li $v0,4
+move $a0,$s0
+syscall
+
+jal Exit
+
+Exit:
+#	Exits the program gracefully
+li $v0,10
+syscall
+
+
+#	The following simply overwrites the Upper Case version of the letter at the position that
+##	the lower case version of it existed, in the input string 
+
+A:
+li $t3,'A'			#	Loads the Upper Case letter into $t3
+sb $t3,($s1)		#	stores the byte (Overwrites the letter) at its original position in the input string.
+j ConvertUpperCase	#	Jumps back to ConvertUpperCase to process the remaining letters in the input string.
+					#	This same process happens for each of the following alphabets. 
+B:
+li $t3,'B'
+sb $t3,($s1)
+j ConvertUpperCase
+
+C:
+li $t3,'C'
+sb $t3,($s1)
+j ConvertUpperCase
+
+D:
+li $t3,'D'
+sb $t3,($s1)
+j ConvertUpperCase
+
+E:
+li $t3,'E'
+sb $t3,($s1)
+j ConvertUpperCase
+
+F:
+li $t3,'F'
+sb $t3,($s1)
+j ConvertUpperCase
+
+G:
+li $t3,'G'
+sb $t3,($s1)
+j ConvertUpperCase
+
+H:
+li $t3,'H'
+sb $t3,($s1)
+j ConvertUpperCase
+
+I:
+li $t3,'I'
+sb $t3,($s1)
+j ConvertUpperCase
+
+J:
+li $t3,'J'
+sb $t3,($s1)
+j ConvertUpperCase
+
+K:
+li $t3,'K'
+sb $t3,($s1)
+j ConvertUpperCase
+
+L:
+li $t3,'L'
+sb $t3,($s1)
+j ConvertUpperCase
+
+M:
+li $t3,'M'
+sb $t3,($s1)
+j ConvertUpperCase
+
+N:
+li $t3,'N'
+sb $t3,($s1)
+j ConvertUpperCase
+
+O:
+li $t3,'O'
+sb $t3,($s1)
+j ConvertUpperCase
+
+P:
+li $t3,'P'
+sb $t3,($s1)
+j ConvertUpperCase
+
+Q:
+li $t3,'Q'
+sb $t3,($s1)
+j ConvertUpperCase
+
+R:
+li $t3,'R'
+sb $t3,($s1)
+j ConvertUpperCase
+
+S:
+li $t3,'S'
+sb $t3,($s1)
+j ConvertUpperCase
+
+T:
+li $t3,'T'
+sb $t3,($s1)
+j ConvertUpperCase
+
+U:
+li $t3,'U'
+sb $t3,($s1)
+j ConvertUpperCase
+
+V:
+li $t3,'V'
+sb $t3,($s1)
+j ConvertUpperCase
+
+W:
+li $t3,'W'
+sb $t3,($s1)
+j ConvertUpperCase
+
+X:
+li $t3,'X'
+sb $t3,($s1)
+j ConvertUpperCase
+
+Y:
+li $t3,'Y'
+sb $t3,($s1)
+j ConvertUpperCase
+
+Z:
+li $t3,'Z'
+sb $t3,($s1)
+j ConvertUpperCase

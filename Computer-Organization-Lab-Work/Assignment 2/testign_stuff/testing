@@ -1,0 +1,49 @@
+.data 
+	list:	.space 400
+	size:	.word 100
+	
+zero:	.word 0
+zero_bin:	.word 0000
+
+one:	.word 1
+one_bin:	.word 0001
+
+two:	.word 2
+two_bin:	.byte 0010
+
+ch:	.word 2
+
+.text
+main:
+	lw	$t0,zero
+	lw	$t1,one
+	lw	$t2,two
+	lw	$t3,ch
+
+	beq	$t3,$t0,convert_zero
+	beq	$t3,$t1,convert_one
+	beq	$t3,$t2,convert_two
+	
+	b	exit_prog
+
+
+convert_zero:
+	lw	$t3,zero_bin
+	b	disp
+convert_one:
+	lw	$t3,one_bin
+	b	disp
+convert_two:
+	lw	$t3,two_bin
+	b	disp
+	
+exit_prog:	
+li	$v0,10
+syscall
+
+disp:
+	li	$v0,1
+	move	$a0,$t3
+	syscall
+
+

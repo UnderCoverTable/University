@@ -1,0 +1,400 @@
+.data 
+	#Program Name: a1_pb2.asm
+	#Programmer Name: Muhammad Sameed Gilani
+	#Programmer Roll Number: 231488347
+	
+	hex: .word 0x24ac15fd
+	list:	.space	128
+	siz:	.word	32
+
+	hex_prompt:	.asciiz	"Instruction in hexa-decimal format: "
+	opcode:	 .asciiz "\nOpcode field <6 bits>:               "
+	rs:	.asciiz "\nRs field <5 bits>:                   "
+	rt:	.asciiz "\nRt field <5 bits>:                   "
+	rd:	.asciiz "\nRd field <5 bits>:                   "
+	shamt:	.asciiz "\nShamt field <5 bits>:                "
+	funct:	.asciiz "\nFunct field <6 bits>:                "
+ 
+	bracket_open:	.asciiz	" ( " 
+	bracket_close:	.asciiz	" ) " 
+	space:	.asciiz	"  "
+ 
+.text 
+
+##start of refrenced code
+main:
+	lw $s0,hex                    #s0 = x 
+	li	$t0,31         #(t0) i == 31 (the counter) 
+	li $t1,1                    #(t1) mask 
+	sll $t1,$t1,31            
+	
+	la	$s3,list	# starting address of array
+	
+loop: 
+	beq $t0,-1,print_hex	 #if t0 == -1, we go to print_hex, which prints the hex value.
+  	and $t3,$s0,$t1           #isolate the bit 
+  
+	beq $t0,$0,after_shift    #shift is needed only if t0 > 0 
+	srlv $t3,$t3,$t0          #right shift before display 
+	
+after_shift: 
+ 	           
+    sw	$t3,($s3)		# add the single bit into the array
+	addi	$s3,$s3,4    #increment the array to the next position
+	          
+  	subi $t0, $t0, 1          #decrease the counter 
+  	srl $t1,$t1, 1            #right shift the mask 
+  	
+  	j loop
+  	
+##end of refrenced code
+
+
+print_hex:	
+	
+	#prints prompt for hex value
+	li	$v0,4
+  	la	$a0,hex_prompt
+  	syscall
+  	
+  	#prints hex value
+	li	$v0,34
+	lw	$a0,hex
+	syscall
+	
+	#prints an opening bracket to contain the binary value of the hexadecimal number
+	li	$v0,4
+	la	$a0,bracket_open
+	syscall
+	
+	
+	  	 
+display:
+
+	li	$t0,0		#loop counter
+	la	$s0,list	# starting address of array
+	lw	$s1,siz		# number of iterations
+	
+display_loop:
+	
+	beq	$t0,$s1,opcode_binary		#when $t0 == $s1, we go to opcode_binary.
+	
+	lw	$t1,($s0)		#load value from array
+
+	# print that value from array	
+	li	$v0,1
+	move	$a0,$t1
+	syscall
+	
+
+	addi	$s0,$s0,4		#increment array index and loop counter
+	addi	$t0,$t0,1
+	
+	# this block prints a space after every set of bits correspoding to the R-type instruction.
+	# ie. space after 6 bits, then 5,then 5,then 5,then 5.
+	beq	$t0,6,spc
+	beq	$t0,11,spc
+	beq	$t0,16,spc
+	beq	$t0,21,spc
+	beq	$t0,26,spc
+
+	b	display_loop 	
+	
+spc:
+	# to print the spaces in the binary number
+	li	$v0,4
+	la	$a0,space
+	syscall
+	
+	j display_loop
+	
+	
+	
+opcode_binary:
+	#print closing bracket for what was opened previously
+	li	$v0,4
+	la	$a0,bracket_close
+	syscall
+	
+	#intialize $t9 to have 0 in it
+	move	$t9,$zero	
+
+	la	$s1,list	#starting address of array. 0th position in array
+	lw	$t1,($s1)	#1st number from array
+	
+	addi	$s1,$s1,4	#4th position
+  	lw	$t2,($s1)	# 2nd number from array
+  	
+  	addi	$s1,$s1,4	#8th position
+  	lw	$t3,($s1)	# 3rd number from array
+  	
+  	addi	$s1,$s1,4	#12th position
+  	lw	$t4,($s1)	# 4th number from array
+  	
+  	addi	$s1,$s1,4	#16th position
+  	lw	$t5,($s1)	# 5th number from array
+  	
+  	addi	$s1,$s1,4#20th position
+  	lw	$t6,($s1)	# 6th number from array
+
+	# in this block, we in a way merge the values stored in the previous registers.
+	#	by using OR with $t9 we first add the value on the left hand side of the binary number
+	#	then we sll, to shift the binary number left by 1 position, to make space for the next value to be added in that position	
+  	or	$t9,$t9,$t1
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t2
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t3
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t4
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t5
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t6
+	#	Now we have the specified binary number, stored in $t9
+
+	#print text for opcode
+	li	$v0,4
+  	la	$a0,opcode
+  	syscall
+  	
+	#print the binary number that we just stored into $t9, as an integer
+  	li	$v0,1
+  	move	$a0,$t9
+  	syscall  
+  	
+  	 
+rs_binary:
+	#intialize $t9 to have 0 in it
+	move	$t9,$zero	
+	
+	addi	$s1,$s1,4	#24th position
+	lw	$t1,($s1)	# 7th number from array
+	
+	addi	$s1,$s1,4	#28th position
+  	lw	$t2,($s1)	# 8th number from array
+  	
+  	addi	$s1,$s1,4	#32nd position
+  	lw	$t3,($s1)	# 9th number from array
+  	
+  	addi	$s1,$s1,4	#36th position
+  	lw	$t4,($s1)	# 10th number from array
+  	
+  	addi	$s1,$s1,4	#40th position
+  	lw	$t5,($s1)	# 11th number from array
+ 
+	# in this block, we in a way merge the values stored in the previous registers.
+	#	by using OR with $t9 we first add the value on the left hand side of the binary number
+	#	then we sll, to shift the binary number left by 1 position, to make space for the next value to be added in that position	
+  	or	$t9,$t9,$t1
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t2
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t3
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t4
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t5
+	#	Now we have the specified binary number, stored in $t9
+
+	#print text for rs
+	li	$v0,4
+  	la	$a0,rs
+  	syscall
+  	
+  	#print the binary number that we just stored into $t9, as an integer
+  	li	$v0,1
+  	move	$a0,$t9
+  	syscall  
+  	 
+rt_binary:
+	#intialize $t9 to have 0 in it
+	move	$t9,$zero
+		
+	addi	$s1,$s1,4	#44th position
+	lw	$t1,($s1)	# 12th number from array
+	
+	addi	$s1,$s1,4	#48th position
+  	lw	$t2,($s1)	# 13th number from array
+  	
+  	addi	$s1,$s1,4	#52nd position
+  	lw	$t3,($s1)	# 14th number from array
+  	
+  	addi	$s1,$s1,4	#56th position
+  	lw	$t4,($s1)	# 15th number from array
+  	
+  	addi	$s1,$s1,4	#60th position
+  	lw	$t5,($s1)	# 16th number from array
+
+	# in this block, we in a way merge the values stored in the previous registers.
+	#	by using OR with $t9 we first add the value on the left hand side of the binary number
+	#	then we sll, to shift the binary number left by 1 position, to make space for the next value to be added in that position
+  	or	$t9,$t9,$t1
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t2
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t3
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t4
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t5
+	#	Now we have the specified binary number, stored in $t9
+
+	#print text for rt
+	li	$v0,4
+  	la	$a0,rt
+  	syscall
+  	
+  	#print the binary number that we just stored into $t9, as an integer
+  	li	$v0,1
+  	move	$a0,$t9
+  	syscall  
+  	
+rd_binary:
+	move	$t9,$zero	
+	
+	addi	$s1,$s1,4	#64th position
+	lw	$t1,($s1)	# 17thnumber from array
+	
+	addi	$s1,$s1,4	#68th position
+  	lw	$t2,($s1)	# 18th number from array
+  	
+  	addi	$s1,$s1,4	#72nd position
+  	lw	$t3,($s1)	# 19th number from array
+  	
+  	addi	$s1,$s1,4	#76th position
+  	lw	$t4,($s1)	# 20th number from array
+  	
+  	addi	$s1,$s1,4	#80th position
+  	lw	$t5,($s1)	# 21st number from array
+ 
+
+	# in this block, we in a way merge the values stored in the previous registers.
+	#	by using OR with $t9 we first add the value on the left hand side of the binary number
+	#	then we sll, to shift the binary number left by 1 position, to make space for the next value to be added in that position
+  	
+  	or	$t9,$t9,$t1
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t2
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t3
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t4
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t5
+	#	Now we have the specified binary number, stored in $t9
+
+	#print text for rd
+	li	$v0,4
+  	la	$a0,rd
+  	syscall
+  	
+  	#print the binary number that we just stored into $t9, as an integer
+  	li	$v0,1
+  	move	$a0,$t9
+  	syscall  
+
+shamt_binary:
+	move	$t9,$zero	
+	
+	addi	$s1,$s1,4	#84th position
+	lw	$t1,($s1)	# 22nd number from array
+	
+	addi	$s1,$s1,4	#88th position
+  	lw	$t2,($s1)	# 23rd number from array
+  	
+  	addi	$s1,$s1,4	#92nd position
+  	lw	$t3,($s1)	# 24th number from array
+  	
+  	addi	$s1,$s1,4	#96th position
+  	lw	$t4,($s1)	# 25th number from array
+  	
+  	addi	$s1,$s1,4	#100th position
+  	lw	$t5,($s1)	# 26th number from array
+ 
+
+	# in this block, we in a way merge the values stored in the previous registers.
+	#	by using OR with $t9 we first add the value on the left hand side of the binary number
+	#	then we sll, to shift the binary number left by 1 position, to make space for the next value to be added in that position
+  	
+  	or	$t9,$t9,$t1
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t2
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t3
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t4
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t5
+	#	Now we have the specified binary number, stored in $t9
+
+	#print text for shamt
+	li	$v0,4
+  	la	$a0,shamt
+  	syscall
+  	#print the binary number that we just stored into $t9, as an integer
+  	li	$v0,1
+  	move	$a0,$t9
+  	syscall  
+
+  	 	 
+funct_binary:
+	move	$t9,$zero	
+	
+	addi	$s1,$s1,4	#104th position
+	lw	$t1,($s1)	# 27th number from array
+	
+	addi	$s1,$s1,4	#108th position
+  	lw	$t2,($s1)	# 28th number from array
+  	
+  	addi	$s1,$s1,4	#112th position
+  	lw	$t3,($s1)	# 29th number from array
+  	
+  	addi	$s1,$s1,4	#116th position
+  	lw	$t4,($s1)	# 30th number from array
+  	
+  	addi	$s1,$s1,4	#120th position
+  	lw	$t5,($s1)	# 31st number from array
+ 	
+ 	addi	$s1,$s1,4	#124th position
+  	lw	$t6,($s1)	# 32nd number from array
+
+	# in this block, we in a way merge the values stored in the previous registers.
+	#	by using OR with $t9 we first add the value on the left hand side of the binary number
+	#	then we sll, to shift the binary number left by 1 position, to make space for the next value to be added in that position
+  	
+  	or	$t9,$t9,$t1
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t2
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t3
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t4
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t5
+	sll	$t9,$t9,1
+	or	$t9,$t9,$t6
+	#	Now we have the specified binary number, stored in $t9
+
+	#print text for funct
+	li	$v0,4
+  	la	$a0,funct
+  	syscall
+  	#print the binary number that we just stored into $t9, as an integer
+  	li	$v0,1
+  	move	$a0,$t9
+  	syscall  
+
+  	 	 
+  	j	exit_prog
+
+  	 
+exit_prog: 
+#ends program gracefully
+li	$v0,10
+syscall
+
+
+
+
+
