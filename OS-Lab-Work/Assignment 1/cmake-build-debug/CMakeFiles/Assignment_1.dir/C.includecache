@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/hp/Desktop/5th Semester - Fall 21/COMP 301 - B (Operating Systems)/Assignment 1/main.c
+stdio.h
+-
+unistd.h
+-
+wait.h
+-
+
